@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Pulse — Asynchronous REST API Weather Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="portal-header">
+      <div class="brand-row">
+        <span class="status-dot"></span>
+        <span class="brand-name">WeatherPulse</span>
+      </div>
+      <h1>Real-Time Global Weather Portal</h1>
+      <p class="subtitle">
+        Search any city worldwide to fetch live meteorological data asynchronously via OpenWeatherMap.
+      </p>
+    </header>
+
+    <main class="portal-main">
+      <!-- Search Form -->
+      <section class="search-section" aria-label="City Weather Search">
+        <form id="weather-form" class="search-form" novalidate>
+          <label for="city-input" class="visually-hidden">Enter city name</label>
+          <input
+            type="text"
+            id="city-input"
+            class="city-input"
+            placeholder="Search city (e.g., Karachi, Lahore, Dubai, London)..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit" id="search-btn" class="btn-search">Get Weather</button>
+        </form>
+
+        <div class="quick-cities" aria-label="Quick City Presets">
+          <span>Quick cities:</span>
+          <button type="button" class="chip-btn" data-city="Karachi">Karachi</button>
+          <button type="button" class="chip-btn" data-city="Islamabad">Islamabad</button>
+          <button type="button" class="chip-btn" data-city="London">London</button>
+          <button type="button" class="chip-btn" data-city="Tokyo">Tokyo</button>
+        </div>
+      </section>
+
+      <!-- Loading State -->
+      <section id="loading-state" class="state-card loading-card hidden" aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Fetching live weather data from OpenWeatherMap...</p>
+      </section>
+
+      <!-- Error State -->
+      <section id="error-state" class="state-card error-card hidden" role="alert" aria-live="assertive">
+        <h2>Unable to Load Weather</h2>
+        <p id="error-message">Something went wrong while fetching weather data.</p>
+      </section>
+
+      <!-- Weather Result Container -->
+      <section id="weather-result" class="weather-card hidden" aria-live="polite">
+        <div class="weather-top">
+          <div>
+            <p id="updated-time" class="meta-label">Updated just now</p>
+            <h2 id="city-heading" class="city-title">--</h2>
+            <p id="weather-desc" class="weather-desc">--</p>
+          </div>
+
+          <div class="temp-block">
+            <img id="weather-icon" src="" alt="" class="weather-icon hidden" />
+            <span id="temperature" class="temperature">--°C</span>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <article class="metric-item">
+            <span class="metric-label">Feels Like</span>
+            <strong id="feels-like" class="metric-value">--°C</strong>
+          </article>
+
+          <article class="metric-item">
+            <span class="metric-label">Humidity</span>
+            <strong id="humidity" class="metric-value">--%</strong>
+          </article>
+
+          <article class="metric-item">
+            <span class="metric-label">Wind Speed</span>
+            <strong id="wind-speed" class="metric-value">-- km/h</strong>
+          </article>
+
+          <article class="metric-item">
+            <span class="metric-label">Pressure</span>
+            <strong id="pressure" class="metric-value">-- hPa</strong>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
