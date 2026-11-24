@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise Analytical Administration Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="portal-layout">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="brand-wrap">
+        <span class="brand-badge"></span>
+        <div>
+          <p class="brand-title">NexusAdmin Analytics</p>
+          <p class="brand-sub">Enterprise Operations &amp; Telemetry Portal</p>
+        </div>
+      </div>
+
+      <nav class="view-nav" aria-label="Portal Views">
+        <button type="button" class="nav-btn active" data-view="overview">Overview</button>
+        <button type="button" class="nav-btn" data-view="analytics">Charts</button>
+        <button type="button" class="nav-btn" data-view="matrix">Accounts Matrix</button>
+      </nav>
+
+      <button type="button" id="theme-toggle" class="theme-btn" aria-label="Toggle color theme">
+        <span id="theme-label">Light Mode</span>
+      </button>
+    </header>
+
+    <main class="portal-content">
+      <!-- KPI Summary Cards -->
+      <section id="view-overview" class="view-section" data-view-panel="overview">
+        <div class="kpi-grid" id="kpi-grid"></div>
+      </section>
+
+      <!-- Reactive Charts Section -->
+      <section id="view-analytics" class="view-section" data-view-panel="analytics">
+        <div class="section-heading-row">
+          <h2>Reactive Performance Charts</h2>
+          <span class="pill-tag">JSON Profile Feed</span>
+        </div>
+        <div class="charts-grid">
+          <article class="panel-card">
+            <h3>Monthly Revenue vs. Target ($K)</h3>
+            <div class="chart-box">
+              <canvas id="revenueChart"></canvas>
+            </div>
+          </article>
+
+          <article class="panel-card">
+            <h3>Regional Account Distribution</h3>
+            <div class="chart-box">
+              <canvas id="regionChart"></canvas>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Searchable & Multi-Column Sortable Table -->
+      <section id="view-matrix" class="view-section" data-view-panel="matrix">
+        <div class="table-toolbar">
+          <div>
+            <h2>Enterprise Accounts Matrix</h2>
+            <p class="muted-text">Filter by account, region, or status, and click column headers to sort.</p>
+          </div>
+          <div class="filter-controls">
+            <input
+              type="search"
+              id="search-input"
+              class="search-box"
+              placeholder="Search account, region, or status..."
+              aria-label="Search accounts"
+            />
+            <select id="status-filter" class="select-box" aria-label="Filter by status">
+              <option value="all">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Expanding">Expanding</option>
+              <option value="Review">Review</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><button type="button" class="sort-btn" data-sort="name">Account <span class="sort-indicator">↕</span></button></th>
+                <th><button type="button" class="sort-btn" data-sort="region">Region <span class="sort-indicator">↕</span></button></th>
+                <th><button type="button" class="sort-btn" data-sort="revenue">ARR ($K) <span class="sort-indicator">↕</span></button></th>
+                <th><button type="button" class="sort-btn" data-sort="growth">YoY Growth (%) <span class="sort-indicator">↕</span></button></th>
+                <th><button type="button" class="sort-btn" data-sort="status">Status <span class="sort-indicator">↕</span></button></th>
+              </tr>
+            </thead>
+            <tbody id="matrix-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
